@@ -12,7 +12,7 @@ module HealthDiagnotic
     end
 
     def ==(other)
-      @name == other.name && @sex == other.sex
+      name_equal?(other) && sex_equal?(other)
     end
 
     def <<(normal_range)
@@ -35,6 +35,14 @@ module HealthDiagnotic
     end
 
     private
+
+    def name_equal?(other)
+      @name == other.name
+    end
+
+    def sex_equal?(other)
+      @sex == other.sex
+    end
 
     def compare_normal_range(value, range)
       if range.min.nil?
