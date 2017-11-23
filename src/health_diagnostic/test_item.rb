@@ -1,4 +1,5 @@
 module HealthDiagnotic
+  # TestItem is
   class TestItem
     include Comparable
 
@@ -11,7 +12,7 @@ module HealthDiagnotic
     end
 
     def ==(other)
-      @name == other.name && @sex == other.sex
+      name_equal?(other) && sex_equal?(other)
     end
 
     def <<(normal_range)
@@ -20,17 +21,13 @@ module HealthDiagnotic
     end
 
     def determine_result_code(value)
-      @normal_ranges.each { |range|
-        if range.min.nil?
-          return range.result_cd if value <= range.max
-        elsif range.max.nil?
-          return range.result_cd if value >= range.min
-        elsif value.between?(range.min, range.max)
-          return range.result_cd
-        end
-      }
+      result_cd = nil
+      @normal_ranges.each do |range|
+        result_cd = compare_normal_range(value, range)
+        break if result_cd
+      end
 
-      nil
+      result_cd
     end
 
     def be_under_treatment?
@@ -38,6 +35,25 @@ module HealthDiagnotic
     end
 
     private
+
+    def name_equal?(other)
+      @name == other.name
+    end
+
+    def sex_equal?(other)
+      @sex == other.sex
+    end
+
+    def compare_normal_range(value, range)
+      if range.min.nil?
+        range.result_cd if value <= range.max
+      elsif range.max.nil?
+        range.result_cd if value >= range.min
+      elsif value.between?(range.min, range.max)
+        range.result_cd
+      end
+    end
+
     def normal_range_cd
       'A'
     end
