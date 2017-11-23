@@ -3,21 +3,23 @@ module HealthDiagnotic
   class TestItem
     include Comparable
 
-    attr_reader :name, :normal_range
+    attr_reader :normal_range
 
-    def initialize(name, sex)
-      @name = name
-      @sex = check_sex(sex)
-      @normal_ranges = []
+    def initialize(test_item_key)
+      @test_item_key = test_item_key
+      @normal_ranges = get_normal_range
+    end
+
+    def name
+      @test_item_key.name
+    end
+
+    def sex
+      @test_item_key.sex
     end
 
     def ==(other)
-      name_equal?(other) && sex_equal?(other)
-    end
-
-    def <<(normal_range)
-      @normal_ranges << normal_range
-      @normal_range = normal_range if normal_range.result_cd == normal_range_cd
+      @test_item_key.eql?(other)
     end
 
     def determine_result_code(value)
@@ -35,14 +37,6 @@ module HealthDiagnotic
     end
 
     private
-
-    def name_equal?(other)
-      @name == other.name
-    end
-
-    def sex_equal?(other)
-      @sex == other.sex
-    end
 
     def compare_normal_range(value, range)
       if range.min.nil?
@@ -62,8 +56,17 @@ module HealthDiagnotic
       'F'
     end
 
-    def check_sex(sex)
-      raise ArgumentError if sex != :male && sex != :female
+    def get_normal_range
+      @normal_range = HealthDiagnotic::NormalRange.new(4.6, 6.1, 'A')
+
+      ranges = []
+      ranges << HealthDiagnotic::NormalRange.new(nil, 4.5, 'B')
+      ranges << HealthDiagnotic::NormalRange.new(4.6, 6.1, 'A')
+      ranges << HealthDiagnotic::NormalRange.new(6.2, 6.7, 'B')
+      ranges << HealthDiagnotic::NormalRange.new(6.8, 7.1, 'C')
+      ranges << HealthDiagnotic::NormalRange.new(7.2, nil, 'D')
+
+      ranges
     end
   end
 end
