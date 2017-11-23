@@ -2,12 +2,12 @@ Dir.glob(File.join('.', '**', '*.rb')).each do |file|
   require file
 end
 
-test_item = HealthDiagnotic::TestItem.new('H1Hblc', :male)
-test_item << HealthDiagnotic::NormalRange.new(nil, 4.5, 'B')
-test_item << HealthDiagnotic::NormalRange.new(4.6, 6.1, 'A')
-test_item << HealthDiagnotic::NormalRange.new(6.2, 6.7, 'B')
-test_item << HealthDiagnotic::NormalRange.new(6.8, 7.1, 'C')
-test_item << HealthDiagnotic::NormalRange.new(7.2, nil, 'D')
+test_item_key = HealthDiagnotic::TestItemKey.new('H1Hblc', :male)
+test_item = HealthDiagnotic::TestItemFactory.instance[test_item_key]
+test_item1 = HealthDiagnotic::TestItemFactory.instance[test_item_key]
+
+p test_item.object_id
+p test_item1.object_id
 
 puts test_item.determine_result_code(3)
 puts test_item.determine_result_code(4.5)
