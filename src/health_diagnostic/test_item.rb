@@ -7,7 +7,7 @@ module HealthDiagnotic
 
     def initialize(test_item_key)
       @test_item_key = test_item_key
-      @normal_ranges = get_normal_range
+      @normal_ranges = normal_range_reader
     end
 
     def name
@@ -56,7 +56,7 @@ module HealthDiagnotic
       'F'
     end
 
-    def get_normal_range
+    def normal_range_reader
       @normal_range = HealthDiagnotic::NormalRange.new(4.6, 6.1, 'A')
 
       ranges = []
