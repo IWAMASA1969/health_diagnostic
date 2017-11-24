@@ -1,4 +1,4 @@
-Dir.glob(File.join('.', '**', '*.rb')).each do |file|
+Dir.glob(File.join('.', '**', 'health_diagnostic/*.rb')).each do |file|
   require file
 end
 
