@@ -7,7 +7,9 @@ module HealthDiagnotic
 
     def initialize(test_item_key)
       @test_item_key = test_item_key
-      @normal_ranges = normal_range_reader
+
+      filename = ENV['TEST_DATA'] + @test_item_key.name + '.txt'
+      @normal_ranges = normal_range_reader(filename)
     end
 
     def name
@@ -52,21 +54,35 @@ module HealthDiagnotic
       'A'
     end
 
+    def normal_range_cd?(other)
+      other == normal_range_cd
+    end
+
     def be_under_treatment_cd
       'F'
     end
 
-    def normal_range_reader
-      @normal_range = HealthDiagnotic::NormalRange.new(4.6, 6.1, 'A')
-
+    def normal_range_reader(filename)
       ranges = []
-      ranges << HealthDiagnotic::NormalRange.new(nil, 4.5, 'B')
-      ranges << HealthDiagnotic::NormalRange.new(4.6, 6.1, 'A')
-      ranges << HealthDiagnotic::NormalRange.new(6.2, 6.7, 'B')
-      ranges << HealthDiagnotic::NormalRange.new(6.8, 7.1, 'C')
-      ranges << HealthDiagnotic::NormalRange.new(7.2, nil, 'D')
-
+      File.open(filename) do |file|
+        file.each_line do |line|
+          ranges << to_normal_range(line)
+          element = ranges.last
+          @normal_range = element if normal_range_cd?(element.result_cd)
+        end
+      end
       ranges
+    end
+
+    def nil_to_i(s)
+      Float(s)
+    rescue ArgumentError
+      nil
+    end
+
+    def to_normal_range(line)
+      s = line.chomp.split(',')
+      NormalRange.new(nil_to_i(s[0]), nil_to_i(s[1]), s[2])
     end
   end
 end
