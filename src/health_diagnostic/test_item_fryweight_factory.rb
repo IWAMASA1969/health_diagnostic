@@ -2,7 +2,7 @@ require 'singleton'
 require 'thread'
 
 module HealthDiagnotic
-  class TestItemFactory
+  class TestItemFriweightFactory
     include Singleton
 
     def initialize

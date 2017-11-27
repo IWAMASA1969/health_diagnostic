@@ -7,7 +7,8 @@ require 'minitest/autorun'
 class TestItemTest < Minitest::Test
   def setup
     @test_item_key = HealthDiagnotic::TestItemKey.new('HbA1c', :male)
-    @test_item = HealthDiagnotic::TestItemFactory.instance[@test_item_key]
+    @test_item =
+      HealthDiagnotic::TestItemFriweightFactory.instance[@test_item_key]
   end
 
   def test_result_cd_a
