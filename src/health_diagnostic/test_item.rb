@@ -3,13 +3,14 @@ module HealthDiagnotic
   class TestItem
     include Comparable
 
-    attr_reader :normal_range
-
     def initialize(test_item_key)
       @test_item_key = test_item_key
 
-      filename = ENV['TEST_DATA'] + @test_item_key.name + '.txt'
-      @normal_ranges = normal_range_reader(filename)
+      test_item_property = test_item_property_reader(@test_item_key.name)
+
+      filename = normal_range_test_item(test_item_property)
+      @inspection_table =
+        inspection_table_factory(test_item_property, filename)
     end
 
     def name
@@ -25,13 +26,7 @@ module HealthDiagnotic
     end
 
     def determine_result_code(value)
-      result_cd = nil
-      @normal_ranges.each do |range|
-        result_cd = compare_normal_range(value, range)
-        break if result_cd
-      end
-
-      result_cd
+      @inspection_table.determine_result_code(value)
     end
 
     def be_under_treatment?
@@ -40,49 +35,37 @@ module HealthDiagnotic
 
     private
 
-    def compare_normal_range(value, range)
-      if range.min.nil?
-        range.result_cd if value <= range.max
-      elsif range.max.nil?
-        range.result_cd if value >= range.min
-      elsif value.between?(range.min, range.max)
-        range.result_cd
+    def inspection_table_factory(property, filename)
+      case property.condition
+      when 'between' then
+        BetweenInspectionTable.new(filename)
       end
-    end
-
-    def normal_range_cd
-      'A'
-    end
-
-    def normal_range_cd?(other)
-      other == normal_range_cd
     end
 
     def be_under_treatment_cd
       'F'
     end
 
-    def normal_range_reader(filename)
-      ranges = []
+    def to_test_item_property(line, key)
+      s = line.chomp.split(',')
+      TestItemProperty.new(s[0], s[1], s[2]) if s[0] == key
+    end
+
+    def test_item_property_reader(name)
+      property = nil
+      filename = ENV['TEST_DATA'] + 'test_item.txt'
       File.open(filename) do |file|
         file.each_line do |line|
-          ranges << to_normal_range(line)
-          element = ranges.last
-          @normal_range = element if normal_range_cd?(element.result_cd)
+          property = to_test_item_property(line, name)
+          break if property
         end
       end
-      ranges
+      property
     end
 
-    def nil_to_i(s)
-      Float(s)
-    rescue ArgumentError
-      nil
-    end
-
-    def to_normal_range(line)
-      s = line.chomp.split(',')
-      NormalRange.new(nil_to_i(s[0]), nil_to_i(s[1]), s[2])
+    def normal_range_test_item(property)
+      sex = property.sex == 'none' ? '' : '_' + @test_item_key.sex.to_s
+      ENV['TEST_DATA'] + property.name + sex + '.txt'
     end
   end
 end
