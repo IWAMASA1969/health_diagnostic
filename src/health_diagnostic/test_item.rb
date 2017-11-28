@@ -39,6 +39,8 @@ module HealthDiagnotic
       case property.condition
       when 'between' then
         BetweenInspectionTable.new(filename)
+      when 'equal' then
+        EqualInspectionTable.new(filename)
       end
     end
 
