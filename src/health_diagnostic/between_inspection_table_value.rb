@@ -1,6 +1,6 @@
 module HealthDiagnotic
   # NormalRange is value for to determine the result of the test item.
-  class NormalRange
+  class BetweenInspectionTableValue
     attr_reader :min, :max, :result_cd
 
     def initialize(min, max, result_cd)
