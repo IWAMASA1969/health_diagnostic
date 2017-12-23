@@ -1,2 +1,3 @@
 HbA1c,none,between
 ProteinInUrine,none,equal
+Diabetes,none,complex
