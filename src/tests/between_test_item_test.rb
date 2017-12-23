@@ -4,7 +4,7 @@ end
 
 require 'minitest/autorun'
 
-class TestItemTest < Minitest::Test
+class BetweenTestItemTest < Minitest::Test
   def setup
     @test_item_key = HealthDiagnotic::TestItemKey.new('HbA1c', :male)
     @test_item =

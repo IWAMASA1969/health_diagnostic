@@ -1,0 +1,16 @@
+a,nil,69,none,A
+a,70,109,none,A
+a,110,125,none,B
+a,126,nil,none,C
+b,nil,69,none,A
+b,70,109,none,A
+b,110,125,none,B
+b,126,nil,none,C
+c,nil,69,none,B
+c,70,109,none,B
+c,110,125,none,C
+c,126,nil,none,D
+d,nil,69,none,C
+d,70,109,none,C
+d,110,125,none,D
+d,126,nil,none,D

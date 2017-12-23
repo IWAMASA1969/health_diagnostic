@@ -18,10 +18,10 @@ module HealthDiagnotic
 
     def compare_inspection_table(value, range)
       if range.value[0] == '>' && value.to_i > range.value.to_i
-          range.result_cd
+        range.result_cd
       elsif value == range.value
-      range.result_cd
-    end
+        range.result_cd
+      end
     end
 
     def to_inspection_table(line)
