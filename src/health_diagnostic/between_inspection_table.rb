@@ -1,3 +1,5 @@
+require 'json'
+
 module HealthDiagnotic
   class BetweenInspectionTable
     def initialize(filename)
@@ -26,25 +28,17 @@ module HealthDiagnotic
       end
     end
 
-    def nil_to_i(s)
-      Float(s)
-    rescue ArgumentError
-      nil
-    end
-
-    def to_inspection_table(line)
-      s = line.chomp.split(',')
-      BetweenInspectionTableValue.new(nil_to_i(s[0]), nil_to_i(s[1]), s[2])
-    end
-
     def inspection_table_reader(filename)
+      recs = load_inspection_table(filename)
       ranges = []
-      File.open(filename) do |file|
-        file.each_line do |line|
-          ranges << to_inspection_table(line)
-        end
+      recs.each do |rec|
+        ranges << BetweenInspectionTableValue.new(rec)
       end
       ranges
+    end
+
+    def load_inspection_table(filename)
+      JSON.parse(File.read(filename))
     end
   end
 end
