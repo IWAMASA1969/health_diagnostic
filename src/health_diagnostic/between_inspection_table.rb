@@ -4,6 +4,7 @@ module HealthDiagnostic
       @inspection_table = inspection_table_reader(filename)
     end
 
+    # change recursive
     def determine_result_code(value)
       result_cd = nil
       @inspection_table.each do |range|

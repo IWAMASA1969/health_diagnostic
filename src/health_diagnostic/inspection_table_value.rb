@@ -8,13 +8,19 @@ module HealthDiagnostic
     def result_cd_factory(value)
       if 'value'.casecmp(value['type'].to_s)
         InspectionValue.new(value['value'].to_s)
-      else
-        nil
+      elsif 'table'.casecmp(value['type'].to_s)
+        inspectiontable_factory(value['value'])
       end
     end
 
     def result_cd
       @result_cd.result_cd
+    end
+
+    private
+
+    def inspectiontable_factory(value)
+
     end
   end
 end
