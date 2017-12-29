@@ -1,7 +1,7 @@
 require 'singleton'
 require 'thread'
 
-module HealthDiagnotic
+module HealthDiagnostic
   class TestItemFriweightFactory
     include Singleton
 

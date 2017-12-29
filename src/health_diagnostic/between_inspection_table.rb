@@ -1,7 +1,5 @@
-require 'json'
-
-module HealthDiagnotic
-  class BetweenInspectionTable
+module HealthDiagnostic
+  class BetweenInspectionTable < InspectionTable
     def initialize(filename)
       @inspection_table = inspection_table_reader(filename)
     end
@@ -16,6 +14,10 @@ module HealthDiagnotic
       result_cd
     end
 
+    def initialize_inspection_value(rec)
+      BetweenInspectionTableValue.new(rec)
+    end
+
     private
 
     def compare_inspection_table(value, range)
@@ -26,19 +28,6 @@ module HealthDiagnotic
       elsif value.between?(range.min, range.max)
         range.result_cd
       end
-    end
-
-    def inspection_table_reader(filename)
-      recs = load_inspection_table(filename)
-      ranges = []
-      recs.each do |rec|
-        ranges << BetweenInspectionTableValue.new(rec)
-      end
-      ranges
-    end
-
-    def load_inspection_table(filename)
-      JSON.parse(File.read(filename))
     end
   end
 end

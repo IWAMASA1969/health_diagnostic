@@ -1,3 +1,5 @@
+require './health_diagnostic/inspection_table.rb'
+require './health_diagnostic/inspection_table_value.rb'
 Dir.glob(File.join('.', '**', 'health_diagnostic/*.rb')).each do |file|
   require file
 end
@@ -6,9 +8,9 @@ require 'minitest/autorun'
 
 class EqualTestItemTest < Minitest::Test
   def setup
-    @test_item_key = HealthDiagnotic::TestItemKey.new('ProteinInUrine', :male)
+    @test_item_key = HealthDiagnostic::TestItemKey.new('ProteinInUrine', :male)
     @test_item =
-      HealthDiagnotic::TestItemFriweightFactory.instance[@test_item_key]
+      HealthDiagnostic::TestItemFriweightFactory.instance[@test_item_key]
   end
 
   def test_result_cd_a

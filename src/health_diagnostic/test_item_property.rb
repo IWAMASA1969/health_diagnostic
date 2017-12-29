@@ -1,4 +1,4 @@
-module HealthDiagnotic
+module HealthDiagnostic
   class TestItemProperty
     attr_reader :name, :sex, :condition
 

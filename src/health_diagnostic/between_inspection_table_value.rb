@@ -1,13 +1,12 @@
-module HealthDiagnotic
+module HealthDiagnostic
   # NormalRange is value for to determine the result of the test item.
-  class BetweenInspectionTableValue
+  class BetweenInspectionTableValue < InspectionTableValue
     attr_reader :min, :max
 
     def initialize(value)
-      p value['result']
+      super(value)
       @min = value['min'].to_s == '' ? nil : value['min'].to_s.to_f
       @max = value['max'].to_s == '' ? nil : value['max'].to_s.to_f
-      @result_cd = result_cd_factory(value['result'])
     end
 
     def ==(other)
@@ -29,15 +28,7 @@ module HealthDiagnotic
     end
 
     def result_cd_equal?(other)
-      @result_cd == other.result_cd
-    end
-
-    def result_cd_factory(value)
-      if 'value'.casecmp(value['type'].to_s)
-        InspectionValue.new(value['value'].to_s)
-      else
-        nil
-      end
+      @result_cd.result_cd == other.result_cd
     end
   end
 end
