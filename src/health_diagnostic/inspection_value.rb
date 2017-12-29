@@ -1,4 +1,4 @@
-module HealthDiagnotic
+module HealthDiagnostic
   class InspectionValue
     attr_reader :result_cd
 

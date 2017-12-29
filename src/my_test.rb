@@ -2,9 +2,9 @@ Dir.glob(File.join('.', '**', 'health_diagnostic/*.rb')).each do |file|
   require file
 end
 
-test_item_key = HealthDiagnotic::TestItemKey.new('HbA1c', :male)
-test_item = HealthDiagnotic::TestItemFactory.instance[test_item_key]
-test_item1 = HealthDiagnotic::TestItemFactory.instance[test_item_key]
+test_item_key = HealthDiagnostic::TestItemKey.new('HbA1c', :male)
+test_item = HealthDiagnostic::TestItemFactory.instance[test_item_key]
+test_item1 = HealthDiagnostic::TestItemFactory.instance[test_item_key]
 
 p test_item.object_id
 p test_item1.object_id

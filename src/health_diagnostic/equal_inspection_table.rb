@@ -1,5 +1,5 @@
-module HealthDiagnotic
-  class EqualInspectionTable
+module HealthDiagnostic
+  class EqualInspectionTable < InspectionTable
     def initialize(filename)
       @inspection_table = inspection_table_reader(filename)
     end
@@ -14,6 +14,10 @@ module HealthDiagnotic
       result_cd
     end
 
+    def initialize_inspection_value(rec)
+      EqualInspectionTableValue.new(rec)
+    end
+
     private
 
     def compare_inspection_table(value, range)
@@ -22,21 +26,6 @@ module HealthDiagnotic
       elsif value == range.value
         range.result_cd
       end
-    end
-
-    def to_inspection_table(line)
-      s = line.chomp.split(',')
-      EqualInspectionTableValue.new(s[0], s[1])
-    end
-
-    def inspection_table_reader(filename)
-      ranges = []
-      File.open(filename) do |file|
-        file.each_line do |line|
-          ranges << to_inspection_table(line)
-        end
-      end
-      ranges
     end
   end
 end

@@ -1,4 +1,4 @@
-module HealthDiagnotic
+module HealthDiagnostic
   # TestItem is
   class TestItem
     include Comparable

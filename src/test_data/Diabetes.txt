@@ -1,2 +1,182 @@
-HbA1c,none,between
-FBG,none,between
+[
+  {
+    "min": "",
+    "max": "5.5",
+    "result": {
+      "type": "table",
+      "value": {
+        "inspection": "FBG",
+        "type": "between",
+        "results": [
+          {
+            "min": "",
+            "max": "69",
+            "result": {
+              "type": "value",
+              "value": "A"
+            }
+          },
+          {
+            "min": "70",
+            "max": "109",
+            "result": {
+              "type": "value",
+              "value": "A"
+            }
+          },
+          {
+            "min": "110",
+            "max": "125",
+            "result": {
+              "type": "value",
+              "value": "B"
+            }
+          },
+          {
+            "min": "126",
+            "max": "",
+            "result": {
+              "type": "value",
+              "value": "C"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "min": "5.6",
+    "max": "5.9",
+    "result": {
+      "type": "table",
+      "value": {
+        "inspection": "FBG",
+        "type": "between",
+        "results": [
+          {
+            "min": "",
+            "max": "69",
+            "result": {
+              "type": "value",
+              "value": "A"
+            }
+          },
+          {
+            "min": "70",
+            "max": "109",
+            "result": {
+              "type": "value",
+              "value": "A"
+            }
+          },
+          {
+            "min": "110",
+            "max": "125",
+            "result": {
+              "type": "value",
+              "value": "B"
+            }
+          },
+          {
+            "min": "126",
+            "max": "",
+            "result": {
+              "type": "value",
+              "value": "C"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "min": "6.0",
+    "max": "6.4",
+    "result": {
+      "type": "table",
+      "value": {
+        "inspection": "FBG",
+        "type": "between",
+        "results": [
+          {
+            "min": "",
+            "max": "69",
+            "result": {
+              "type": "value",
+              "value": "B"
+            }
+          },
+          {
+            "min": "70",
+            "max": "109",
+            "result": {
+              "type": "value",
+              "value": "B"
+            }
+          },
+          {
+            "min": "110",
+            "max": "125",
+            "result": {
+              "type": "value",
+              "value": "C"
+            }
+          },
+          {
+            "min": "126",
+            "max": "",
+            "result": {
+              "type": "value",
+              "value": "D"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "min": "6.5",
+    "max": "",
+    "result": {
+      "type": "table",
+      "value": {
+        "inspection": "FBG",
+        "type": "between",
+        "results": [
+          {
+            "min": "",
+            "max": "69",
+            "result": {
+              "type": "value",
+              "value": "C"
+            }
+          },
+          {
+            "min": "70",
+            "max": "109",
+            "result": {
+              "type": "value",
+              "value": "C"
+            }
+          },
+          {
+            "min": "110",
+            "max": "125",
+            "result": {
+              "type": "value",
+              "value": "D"
+            }
+          },
+          {
+            "min": "126",
+            "max": "",
+            "result": {
+              "type": "value",
+              "value": "D"
+            }
+          }
+        ]
+      }
+    }
+  }
+]

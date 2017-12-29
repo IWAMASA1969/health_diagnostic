@@ -1,5 +1,37 @@
--,A
-+,B
-2+,C
-3+,D
->3+,D
+[
+  {
+    "condition": "-",
+    "result": {
+      "type": "value",
+      "value": "A"
+    }
+  },
+  {
+    "condition": "+",
+    "result": {
+      "type": "value",
+      "value": "B"
+    }
+  },
+  {
+    "condition": "2+",
+    "result": {
+      "type": "value",
+      "value": "C"
+    }
+  },
+  {
+    "condition": "3+",
+    "result": {
+      "type": "value",
+      "value": "D"
+    }
+  },
+  {
+    "condition": ">3+",
+    "result": {
+      "type": "value",
+      "value": "D"
+    }
+  }
+]

@@ -1,11 +1,11 @@
-module HealthDiagnotic
+module HealthDiagnostic
   # NormalRange is value for to determine the result of the test item.
-  class EqualInspectionTableValue
-    attr_reader :value, :result_cd
+  class EqualInspectionTableValue < InspectionTableValue
+    attr_reader :value
 
-    def initialize(value, result_cd)
-      @value = value
-      @result_cd = result_cd
+    def initialize(value)
+      super(value)
+      @value = value['condition'].to_s == '' ? nil : value['condition'].to_s
     end
 
     def ==(other)
@@ -19,7 +19,7 @@ module HealthDiagnotic
     end
 
     def result_cd_equal?(other)
-      @result_cd == other.result_cd
+      @result_cd.result_cd == other.result_cd
     end
   end
 end
